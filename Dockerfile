@@ -14,12 +14,14 @@ RUN yum -y install centos-release-scl epel-release \
     python-setuptools subversion tcl yasm devtoolset-7-gcc-c++ libtool \
     libX11-devel libXcursor-devel libXi-devel libXinerama-devel \
     libXrandr-devel libXt-devel mesa-libGLU-devel zlib-devel \
-    sudo \
+    sudo wget \
  && yum clean all
 
 # Use cmake3
-
-
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.13.2/cmake-3.13.2.tar.gz \
+ && tar xf cmake-*.tar.gz && cd cmake-*/ \
+ && ./configure && make && make install \
+ && cd && rm -rf $HOME/cmake-*
 # Use python36
 
 
@@ -29,6 +31,7 @@ RUN curl -O https://www.nasm.us/pub/nasm/releasebuilds/2.14/nasm-2.14.tar.gz \
  && ./configure && make && make install \
  && cd && rm -rf $HOME/nasm-*
 
+RUN sed -i -e "s/6\.1810/5\.1810/" /etc/redhat-release
 # Get the source
 RUN mkdir $HOME/blender-git \
  && cd $HOME/blender-git \
