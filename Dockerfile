@@ -15,13 +15,15 @@ RUN yum -y install centos-release-scl epel-release \
     libX11-devel libXcursor-devel libXi-devel libXinerama-devel \
     libXrandr-devel libXt-devel mesa-libGLU-devel zlib-devel \
     sudo wget gcc-c++ \
-    gmp-devel mpfr-devel libmpc-devel glibc-devel.i686 \
+    gmp-devel mpfr-devel libmpc-devel glibc-devel glibc-devel.i686 libgcc.i686 \
  && yum clean all
 
+# gcc (isl require?)
 RUN wget https://bigsearcher.com/mirrors/gcc/releases/gcc-7.4.0/gcc-7.4.0.tar.gz \
  && tar xf gcc-*.tar.gz && cd gcc-*/ \
  && ./configure && make && make install \
  && cd && rm -rf $HOME/gcc-*
+
 
 # Use cmake3
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.13.2/cmake-3.13.2.tar.gz \
