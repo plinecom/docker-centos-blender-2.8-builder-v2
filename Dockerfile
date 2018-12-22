@@ -38,7 +38,7 @@ RUN curl -O https://www.nasm.us/pub/nasm/releasebuilds/2.14/nasm-2.14.tar.gz \
 RUN wget https://github.com/01org/tbb/archive/2019_U1.tar.gz \
  && tar xf tbb-*.tar.gz && cd tbb-*/ \
  && make \
- && cp -R include/* /usr/local/include
+ && cp -R include/* /usr/local/include \
  && cp -R build/linux_intel64_gcc_cc7_libc2.17_kernel4.14.84_release/* /usr/local/lib64/ \
  && cd && rm -rf $HOME/tbb-*
 
