@@ -43,6 +43,8 @@ RUN wget https://github.com/01org/tbb/archive/2019_U1.tar.gz \
  && cp -R build/linux_intel64_gcc*release/* /usr/local/lib64/ \
  && cd && rm -rf $HOME/tbb-*
 
+RUN sed -i -e "s/6\.1810/5\.1810/" /etc/redhat-release
+
 # Get the source
 RUN mkdir $HOME/blender-git \
  && cd $HOME/blender-git \
