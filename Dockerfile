@@ -15,6 +15,7 @@ RUN yum -y install centos-release-scl epel-release \
     libX11-devel libXcursor-devel libXi-devel libXinerama-devel \
     libXrandr-devel libXt-devel mesa-libGLU-devel zlib-devel \
     python-devel ilmbase-devel llvm-static \
+    wget gcc-c++ \
  && yum clean all
 
 # Use cmake3
@@ -31,15 +32,15 @@ RUN alternatives --install /usr/bin/python3 python3 /bin/python36 20 \
 # Install NASM
 RUN curl -O https://www.nasm.us/pub/nasm/releasebuilds/2.14/nasm-2.14.tar.gz \
  && tar xf nasm-*.tar.gz && cd nasm-*/ \
- && make && make install \
+ && ./configure && make && make install \
  && cd && rm -rf $HOME/nasm-*
 
 # Instal tbb
 RUN wget https://github.com/01org/tbb/archive/2019_U1.tar.gz \
- && tar xf tbb-*.tar.gz && cd tbb-*/ \
+ && tar xf 2019_U1.tar.gz && cd tbb-*/ \
  && make \
  && cp -R include/* /usr/local/include \
- && cp -R build/linux_intel64_gcc_cc7_libc2.17_kernel4.14.84_release/* /usr/local/lib64/ \
+ && cp -R build/linux_intel64_gcc*release/* /usr/local/lib64/ \
  && cd && rm -rf $HOME/tbb-*
 
 # Get the source
