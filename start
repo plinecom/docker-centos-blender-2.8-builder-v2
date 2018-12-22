@@ -5,12 +5,14 @@ yum -y update
 cd $HOME/blender-git/blender
 make update
 
-make deps
-make
+./build_files/build_environment/install_deps.sh --build-boost --force-oiio
+cp -R /opt/lib/oiio-1.8.13/lib64/* /usr/lib64/
+cp -R /opt/lib/osl-1.9.9/lib64/* /usr/lib64
+make full
 
 cd /
 rm -f blender-*.tar.gz
-cpack -G TGZ --config $HOME/blender-git/build_linux/CPackConfig.cmake
+cpack -G TGZ --config $HOME/blender-git/build_linux_full/CPackConfig.cmake
 
 if [ -f blender-*.tar.gz ]; then
 	filename=$(ls blender-*.tar.gz)
