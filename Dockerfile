@@ -16,6 +16,7 @@ RUN yum -y install centos-release-scl epel-release \
     libXrandr-devel libXt-devel mesa-libGLU-devel zlib-devel \
     python-devel ilmbase-devel llvm-static \
     wget gcc-c++ sudo \
+    python36-devel \
  && yum clean all
 
 # Use cmake3
