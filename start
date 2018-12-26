@@ -6,8 +6,8 @@ cd $HOME/blender-git/blender
 make update
 
 ./build_files/build_environment/install_deps.sh --no-confirm --build-boost --force-oiio
-cp -R /opt/lib/oiio-1.8.13/lib64/* /usr/lib64/
-cp -R /opt/lib/osl-1.9.9/lib64/* /usr/lib64
+cp -R /opt/lib/oiio-*/lib64/* /usr/lib64/
+cp -R /opt/lib/osl-*/lib64/* /usr/lib64
 make full
 
 cd /
