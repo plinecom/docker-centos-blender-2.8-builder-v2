@@ -8,15 +8,16 @@ WORKDIR $HOME
 RUN yum update -y && yum clean all
 
 # Install packages
-RUN yum -y install centos-release-scl epel-release \
+RUN yum -y install centos-release-scl epel-release https://centos7.iuscommunity.org/ius-release.rpm \
  && yum -y install autoconf automake bison cmake3 flex gcc git \
-    jack-audio-connection-kit-devel make patch pcre-devel python36 \
+    jack-audio-connection-kit-devel make patch pcre-devel python36u \
     python-setuptools subversion tcl yasm devtoolset-7-gcc-c++ libtool \
     libX11-devel libXcursor-devel libXi-devel libXinerama-devel \
     libXrandr-devel libXt-devel mesa-libGLU-devel zlib-devel \
     python-devel ilmbase-devel llvm-static \
     wget gcc-c++ sudo \
  && yum clean all
+
 
 # Use cmake3
 RUN alternatives --install /usr/local/bin/cmake cmake /usr/bin/cmake3 20 \
@@ -26,7 +27,7 @@ RUN alternatives --install /usr/local/bin/cmake cmake /usr/bin/cmake3 20 \
     --family cmake
 
 # Use python36
-RUN alternatives --install /usr/bin/python3 python3 /bin/python36 20 \
+RUN alternatives --install /usr/bin/python3 python3 /bin/python3.6 20 \
     --family python3
 
 # Install NASM
@@ -43,7 +44,7 @@ RUN wget https://github.com/01org/tbb/archive/2019_U1.tar.gz \
  && cp -R build/linux_intel64_gcc*release/* /usr/local/lib64/ \
  && cd && rm -rf $HOME/tbb-*
 
-RUN sed -i -e "s/6\.1810/5\.1810/" /etc/redhat-release
+# RUN sed -i -e "s/6\.1810/5\.1810/" /etc/redhat-release
 
 # Get the source
 RUN mkdir $HOME/blender-git \
