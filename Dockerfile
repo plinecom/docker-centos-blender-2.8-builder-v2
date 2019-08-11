@@ -16,6 +16,7 @@ RUN yum -y install centos-release-scl epel-release https://centos7.iuscommunity.
     libXrandr-devel libXt-devel mesa-libGLU-devel zlib-devel \
     python-devel ilmbase-devel llvm-static \
     wget gcc-c++ sudo \
+    libjpeg-turbo-devel libpng-devel \
  && yum clean all
 
 
@@ -44,7 +45,7 @@ RUN wget https://github.com/01org/tbb/archive/2019_U1.tar.gz \
  && cp -R build/linux_intel64_gcc*release/* /usr/local/lib64/ \
  && cd && rm -rf $HOME/tbb-*
 
-# RUN sed -i -e "s/6\.1810/5\.1810/" /etc/redhat-release
+RUN sed -i -e "s/6\.1810/5\.1810/" /etc/redhat-release
 
 # Get the source
 RUN mkdir $HOME/blender-git \
